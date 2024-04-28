@@ -7,8 +7,6 @@
 #include <stdlib.h> /* malloc() free() atoi()*/
 #include <string.h> /* strlen() */
 
-#define MAX_DUP_SIZE 9
-#define MAX_SEQ_SIZE 10
 #define MAX_ARG_PAIRS 3
 
 int dups[MAX_ARG_PAIRS];
