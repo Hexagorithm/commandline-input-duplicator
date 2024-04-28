@@ -66,6 +66,7 @@ int main(int argc, char* argv[])
 		}
 	}
 	printf("Your sequence: \"%s\"\n",output);
+	free(output);
 	return 0;
 }
 
