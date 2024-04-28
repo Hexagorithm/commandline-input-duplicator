@@ -15,19 +15,6 @@ char* seqs[MAX_ARG_PAIRS];
 int calculate_pair_size(const char* seq, const int dup);
 int calculate_buffer_size(int pairs);
 
-int calculate_buffer_size(int pairs)
-{
-	int size = 0;
-	for (int i = 0; i < pairs; ++i)
-	{
-		size += calculate_pair_size(seqs[i],dups[i]);
-	}
-	return size;
-}
-int calculate_pair_size(const char* seq, const int dup)
-{
-	return strlen(seq) * dup;
-}
 
 int main(int argc, char* argv[])
 {
@@ -80,4 +67,19 @@ int main(int argc, char* argv[])
 	}
 	printf("Your sequence: \"%s\"\n",output);
 	return 0;
+}
+
+
+int calculate_buffer_size(int pairs)
+{
+	int size = 0;
+	for (int i = 0; i < pairs; ++i)
+	{
+		size += calculate_pair_size(seqs[i],dups[i]);
+	}
+	return size;
+}
+int calculate_pair_size(const char* seq, const int dup)
+{
+	return strlen(seq) * dup;
 }
