@@ -7,13 +7,8 @@
 #include <stdlib.h> /* malloc() free() atoi()*/
 #include <string.h> /* strlen() */
 
-#define MAX_ARG_PAIRS 3
-
-int dups[MAX_ARG_PAIRS];
-char* seqs[MAX_ARG_PAIRS];
-
+int calculate_buffer_size(int pairs, char** seqs, int* dups);
 int calculate_pair_size(const char* seq, const int dup);
-int calculate_buffer_size(int pairs);
 
 
 int main(int argc, char* argv[])
@@ -33,11 +28,10 @@ int main(int argc, char* argv[])
 		printf("Incorrect number of arguments!\n");
 		return 1;
 	}
-	else if (argc - 1 > MAX_ARG_PAIRS * 2)
-	{
-		printf("Too many argument pairs, limit(%d) reached!\n",MAX_ARG_PAIRS);
-		return 1;
-	}
+	int operator_amount = (argc - 1	) /2;
+	int* dups = (int* ) malloc(sizeof(int) * operator_amount);
+	char** seqs = (char**) malloc(sizeof(char*) * operator_amount);
+
 	/* load sequences and duplicators into their respective lists */
 	for (int i = 0, seq_index = 0, dup_index = 0; i < argc - 1; ++i)
 	{
@@ -50,7 +44,7 @@ int main(int argc, char* argv[])
 	}
 
 	int pairs = (argc - 1) / 2;
-	size_t buffer_size = calculate_buffer_size(pairs) + 1; /* null byte*/
+	size_t buffer_size = calculate_buffer_size(pairs,seqs,dups) + 1; /* null byte*/
 	char* output = (char*) malloc(sizeof(char) * ( buffer_size ));
 	output[buffer_size-1] = '\0';
 	if (output == NULL)
@@ -71,7 +65,7 @@ int main(int argc, char* argv[])
 }
 
 
-int calculate_buffer_size(int pairs)
+int calculate_buffer_size(int pairs, char** seqs, int* dups)
 {
 	int size = 0;
 	for (int i = 0; i < pairs; ++i)
@@ -80,6 +74,7 @@ int calculate_buffer_size(int pairs)
 	}
 	return size;
 }
+
 int calculate_pair_size(const char* seq, const int dup)
 {
 	return strlen(seq) * dup;
