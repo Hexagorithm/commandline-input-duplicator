@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 			strncat(output,seqs[i],strlen(seqs[i]) +1);
 		}
 	}
-	printf("Your sequence: \"%s\"\n",output);
+	printf("%s\n",output);
 	free(output);
 	return 0;
 }
